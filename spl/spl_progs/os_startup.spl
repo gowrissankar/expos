@@ -1,12 +1,14 @@
+//init 
 loadi(65,7);
 loadi(66,8);
 
+//int10
 loadi(22,35);
 loadi(23,36);
 
+//exhandler
 loadi(2,15);
 loadi(3,16);
-
 
 //loading lib code
 loadi(63,13);
@@ -15,6 +17,12 @@ loadi(64,14);
 //loading the timer stg8
 loadi(4, 17);
 loadi(5, 18);
+
+//load int 7 
+loadi(16, 29);
+loadi(17, 30);
+
+
 
 PTBR = PAGE_TABLE_BASE;
 PTLR = 10 ;
@@ -49,10 +57,23 @@ PTLR = 10 ;
 
 
 //setting the IP
-
 SP = 8 *512 ;
 
 [76 * 512] = [65 * 512  + 1 ] ;
 //entry adress in 2nd word of header
+
+
+//set process table 
+
+//user area
+[PROCESS_TABLE + 11] = 80;
+
+//pid
+[PROCESS_TABLE + 1] = 0;
+
+//sys stat tabl
+[SYSTEM_STATUS_TABLE + 1] = 0;
+
+
 
 ireturn;
